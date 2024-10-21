@@ -1,0 +1,136 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Airflow specific
+airflow.cfg
+unittests.cfg
+webserver_config.py
+airflow.db
+logs/
+
+# PySpark specific
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Pytest cache
+.pytest_cache/
+__pycache__/
+
+# PyCharm specific
+.idea/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Docker-related
+docker-compose.yml
+Dockerfile
+*.env
+*.log
+*.pid
+*.tar
+tmp/
+# Ignore Docker volumes
+volumes/
+
+# Ignore SQLite database files
+*.db
+*.sqlite3
+
+# Logs and runtime files
+*.log
+*.out
+*.pid
+*.dat
+*.tmp
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+pytestdebug.log
+
+# Environments and dependency managers
+*.pvenv
+*.pip
+*.pypoetry
+.pipfile
+.pipfile.lock
+poetry.lock
+poetry.toml
+
+# MyPy
+.mypy_cache/
+
+# Temporary files
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+*.tmp
+*~
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# IDE settings
+.idea/
+.vscode/
+
+# Mac OS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# airflow related
+dags/__pycache__/
