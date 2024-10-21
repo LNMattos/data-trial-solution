@@ -10,3 +10,5 @@ pandas
 pyarrow
 fastparquet
 great_expectations
+boto3
+sqlalchemy

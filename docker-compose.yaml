@@ -69,9 +69,10 @@ x-airflow-common:
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server
     # yamllint enable rule:line-length
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+    AIRFLOW_CONN_MINIO_S3: 's3://minioadmin:minioadmin@minio:9000'
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-} 
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
@@ -334,8 +335,30 @@ services:
     volumes:
       - ./notebooks:/home/jovyan/work
 
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"       # Interface principal do MinIO
+      - "9001:9001"       # Console Web do MinIO
+    environment:
+      MINIO_ROOT_USER: minioadmin        # Usuário padrão
+      MINIO_ROOT_PASSWORD: minioadmin    # Senha padrão
+    volumes:
+      - minio-data:/data
+      - minio-config:/root/.minio
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    restart: always
+
 
 volumes:
   postgres-airflow-db-volume:
   postgres-clever-db-volume:
   pgadmin-volume:
+  minio-data:
+  minio-config:
