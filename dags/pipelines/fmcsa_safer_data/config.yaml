@@ -1,0 +1,12 @@
+backend: "pandas"
+file_name: "fmcsa_safer_data"
+local_file_extension: "csv"
+local_path: "scripts/data_examples"
+
+bucket_raw_ini_dir: "bronze/to_process"
+bucket_raw_end_dir: "bronze/processed"
+bucket_silver_dir: "silver/fmcsa_safer_data"
+bucket_file_extension: "parquet"
+
+postgres_table: "trusted_fmcsa_safer_data"
+postgres_action: "replace"
