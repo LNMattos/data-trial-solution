@@ -11,7 +11,7 @@ class DataProcessorInterface(ABC):
         pass
 
     @abstractmethod
-    def remove_rows(self, condition: Any) -> None:
+    def filter_rows(self, condition: Any) -> None:
         pass
 
     @abstractmethod
