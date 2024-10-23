@@ -11,8 +11,8 @@ class DataProcessor:
     def remove_columns(self, columns: List[str]) -> None:
         self.processor.remove_columns(columns)
 
-    def remove_rows(self, condition: Any) -> None:
-        self.processor.remove_rows(condition)
+    def filter_rows(self, condition: Any) -> None:
+        self.processor.filter_rows(condition)
 
     def convert_types(self, column_type_map: Dict[str, Any]) -> None:
         self.processor.convert_types(column_type_map)

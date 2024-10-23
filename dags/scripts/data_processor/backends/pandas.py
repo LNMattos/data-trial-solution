@@ -17,8 +17,8 @@ class PandasDataProcessor(DataProcessorInterface):
     def remove_columns(self, columns: List[str]) -> None:
         self.df.drop(columns=columns, inplace=True, errors='ignore')
 
-    def remove_rows(self, condition: Any) -> None:
-        self.df = self.df[~condition(self.df)]
+    def filter_rows(self, condition: Any) -> None:
+        self.df = self.df[condition(self.df)]
 
     def convert_types(self, column_type_map: Dict[str, Any]) -> None:
         self.df = self.df.astype(column_type_map)

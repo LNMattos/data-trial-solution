@@ -23,9 +23,9 @@ class DuckDBDataProcessor(DataProcessorInterface):
         cols_str = ", ".join(cols)
         self.connection.execute(f"CREATE OR REPLACE TABLE {self.table_name} AS SELECT {cols_str} FROM {self.table_name}")
 
-    def remove_rows(self, condition: Any) -> None:
+    def filter_rows(self, condition: Any) -> None:
         # Supondo que 'condition' seja uma expressão SQL
-        self.connection.execute(f"CREATE OR REPLACE TABLE {self.table_name} AS SELECT * FROM {self.table_name} WHERE NOT ({condition})")
+        self.connection.execute(f"CREATE OR REPLACE TABLE {self.table_name} AS SELECT * FROM {self.table_name} WHERE ({condition})")
 
     def convert_types(self, column_type_map: Dict[str, Any]) -> None:
         set_clause = ", ".join([f"{col}::{dtype}" for col, dtype in column_type_map.items()])
