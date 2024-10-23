@@ -37,7 +37,7 @@ def process_data(config):
     
     bucket_ini_file_path = f"{bucket_raw_ini_dir}{file_name}.{local_file_extension}"
     bucket_end_file_path = f"{bucket_raw_end_dir}{file_name}.{local_file_extension}"
-    
+     
     s3_manager.upload_file(local_file_path, bucket_ini_file_path)
     
     pd_processor = DataProcessor(backend)
