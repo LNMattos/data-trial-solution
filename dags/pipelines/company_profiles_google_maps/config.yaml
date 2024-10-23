@@ -1,0 +1,12 @@
+backend: "pandas"
+file_name: "company_profiles_google_maps"
+local_file_extension: "csv"
+local_path: "scripts/data_examples"
+
+bucket_raw_ini_dir: "bronze/to_process"
+bucket_raw_end_dir: "bronze/processed"
+bucket_silver_dir: "silver/company_profiles_google_maps"
+bucket_file_extension: "parquet"
+
+postgres_table: "trusted_company_profiles_google_maps"
+postgres_action: "replace"
