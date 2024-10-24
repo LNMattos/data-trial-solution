@@ -1,0 +1,8 @@
+psycopg2-binary
+requests
+pandas
+numpy
+sqlalchemy
+geopy
+streamlit
+openai
