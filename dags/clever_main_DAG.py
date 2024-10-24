@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
+from scripts.clever_main_pipeline import upload_to_postgres
 
 default_args = {
     "owner": "alec.ventura",
