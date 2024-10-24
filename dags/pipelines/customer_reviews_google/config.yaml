@@ -1,0 +1,20 @@
+backend: "pandas"
+file_name: "customer_reviews_google"
+local_file_extension: "csv"
+local_path: "scripts/data_examples"
+
+bucket_raw_ini_dir: "bronze/to_process"
+bucket_raw_end_dir: "bronze/processed"
+bucket_silver_dir: "silver/customer_reviews_google"
+bucket_gold_dir: "gold/customer_reviews_google"
+bucket_file_extension: "parquet"
+
+postgres_table_silver: "trusted_fact_customer_reviews_google"
+postgres_action_silver: "replace"
+
+postgres_table_gold: "curated_fact_customer_reviews_google"
+postgres_action_gold: "replace"
+
+postgres_table_score: "curated_score_customer_reviews_google"
+postgres_action_score: "replace"
+postgres_action_score_hist: "append"
