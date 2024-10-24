@@ -43,7 +43,11 @@ I conducted exploratory data analysis using a **Jupyter Lab** notebook, focusing
 ## 5. Interactive Application with Streamlit
 
 I developed a **Streamlit app** that allows users to input data and generate customized content based on their responses. This app serves as a user-friendly interface to interact with the data intuitively.
+Here an example:
 [AI Generated markdown](docs/auto_generated_md.md)
+
+To works its necessary to use a OpenAI API key
+
 
 
 
