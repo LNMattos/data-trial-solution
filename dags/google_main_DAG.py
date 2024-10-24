@@ -4,8 +4,8 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.empty import EmptyOperator
 from datetime import datetime
-from pipelines.customer_reviews_google.process import process_data as process_customer_reviews_google
-from pipelines.company_profiles_google_maps.process import process_data as process_company_profiles_google_maps
+from pipelines.customer_reviews_google.process import process_pipeline as pipeline_customer_reviews_google
+from pipelines.company_profiles_google_maps.process import process_pipeline as pipeline_company_profiles_google_maps
 
 
 default_args = {
@@ -46,7 +46,7 @@ with DAG(
         python_callable=run_pipeline,
         op_kwargs={
             'pipeline_name': 'customer_reviews_google',
-            'process_function': process_customer_reviews_google
+            'process_function': pipeline_customer_reviews_google
         },
     )
 
@@ -55,8 +55,8 @@ with DAG(
         python_callable=run_pipeline,
         op_kwargs={
             'pipeline_name': 'company_profiles_google_maps',
-            'process_function': process_company_profiles_google_maps
+            'process_function': pipeline_company_profiles_google_maps
         },
     )
     
-    start_task >> process_customer_reviews_google_task >> process_company_profiles_google_maps_task >> finish_task
+    start_task >> (process_customer_reviews_google_task, process_company_profiles_google_maps_task) >> finish_task
