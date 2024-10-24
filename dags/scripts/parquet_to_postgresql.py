@@ -3,12 +3,11 @@ import psycopg2
 from pyspark.sql import SparkSession
 from sqlalchemy import create_engine, inspect, Table, Column, MetaData
 from sqlalchemy.types import (
-    Integer, Float, String, Boolean, Date, DateTime, LargeBinary
+    Integer, Float, String, Boolean, DateTime
 )
-import scripts.constants as c  # Assuming this module contains PostgreSQL credentials
+import scripts.constants as c
 import boto3
 import io
-import sqlalchemy
 
 class ParquetToPostgres:
     def __init__(
@@ -44,12 +43,10 @@ class ParquetToPostgres:
         self.access_key = access_key
         self.secret_key = secret_key
 
-        # Configure PostgreSQL connection
         self.engine = create_engine(
             f'postgresql+psycopg2://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_dbname}'
         )
 
-        # Initialize Spark session if needed
         if self.backend == "pyspark":
             self.spark = self.get_spark_session()
 
@@ -94,12 +91,15 @@ class ParquetToPostgres:
         :param action: Action to be performed ('append' or 'replace').
         :param partition_cols: Partition columns (optional, for PySpark).
         """
+        print(f"Uploading to {table_name}")
         if self.backend == "pandas":
             self._execute_pandas(parquet_path, table_name, action)
         elif self.backend == "pyspark":
             self._execute_pyspark(parquet_path, table_name, action, partition_cols)
         else:
             raise ValueError("Unsupported backend. Use 'pandas' or 'pyspark'.")
+        print(f"Upload to {table_name} finished")
+
 
     def _execute_pandas(self, parquet_key: str, table_name: str, action: str):
         """
@@ -117,18 +117,15 @@ class ParquetToPostgres:
             aws_secret_access_key=self.secret_key
         )
 
-        # Construct full S3 path
         bucket = self.bucket_name
         key = parquet_key
 
-        # Download Parquet file into memory
         response = s3_client.get_object(Bucket=bucket, Key=key)
         parquet_data = response['Body'].read()
 
-        # Load DataFrame with pandas
         df = pd.read_parquet(io.BytesIO(parquet_data))
+        del parquet_data
 
-        # Infer and align schema
         self._ensure_table_schema_pandas(table_name, df)
 
         # Determine write mode
@@ -139,7 +136,6 @@ class ParquetToPostgres:
         else:
             raise ValueError("Invalid action. Use 'append' or 'replace'.")
 
-        # Insert data into PostgreSQL
         df.to_sql(name=table_name, con=self.engine, if_exists=if_exists, index=False, method='multi')
 
     def _execute_pyspark(self, parquet_key: str, table_name: str, action: str, partition_cols: list):
@@ -151,10 +147,8 @@ class ParquetToPostgres:
         :param action: Action to be performed ('append' or 'replace').
         :param partition_cols: Partition columns (optional).
         """
-        # Define full S3 path
         s3_path = f"s3a://{self.bucket_name}/{parquet_key}"
 
-        # Load DataFrame with Spark
         df = self.spark.read.parquet(s3_path)
 
         # Infer and align schema
@@ -176,7 +170,6 @@ class ParquetToPostgres:
         else:
             raise ValueError("Invalid action. Use 'append' or 'replace'.")
 
-        # Write data to PostgreSQL
         df.write.jdbc(url=jdbc_url, table=table_name, mode=write_mode, properties=connection_properties)
 
     def _ensure_table_schema_pandas(self, table_name: str, df: pd.DataFrame):
@@ -188,8 +181,7 @@ class ParquetToPostgres:
         """
         inspector = inspect(self.engine)
         if inspector.has_table(table_name):
-            # Optional: Verify if the schema matches
-            # This can be complex; for simplicity, we assume schemas are compatible
+            # This can be complex; for simplicity, I assume schemas are compatible
             pass
         else:
             # Map pandas types to SQLAlchemy
@@ -208,8 +200,7 @@ class ParquetToPostgres:
         """
         inspector = inspect(self.engine)
         if inspector.has_table(table_name):
-            # Optional: Verify if the schema matches
-            # This can be complex; for simplicity, we assume schemas are compatible
+            # This can be complex; for simplicity, I assume schemas are compatible
             pass
         else:
             # Convert Spark schema to pandas for easier mapping
