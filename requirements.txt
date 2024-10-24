@@ -12,3 +12,6 @@ fastparquet
 great_expectations
 boto3
 sqlalchemy
+nltk
+vaderSentiment
+geopy
