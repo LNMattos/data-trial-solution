@@ -28,7 +28,7 @@ def run_pipeline(pipeline_name, process_function, **kwargs):
     process_function(config)
 
 with DAG(
-    'customer_reviews_google_dag',
+    'google_main_dag',
     tags=['GOOGLE', 'S3', 'POSTGRESQL'],
     default_args=default_args,
     description='DAG to process Google reviews and companies data',
