@@ -15,3 +15,5 @@ sqlalchemy
 nltk
 vaderSentiment
 geopy
+streamlit
+openai
