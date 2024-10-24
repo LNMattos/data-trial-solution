@@ -40,7 +40,17 @@ I implemented a **Lake House** architecture using **Airflow**, **MinIO** (S3 sim
 
 I conducted exploratory data analysis using a **Jupyter Lab** notebook, focusing on the `company_profiles_google_maps` file. This file provides insights generated from data about company profiles.
 
-## 5. Interactive Application with Streamlit
+## 4. Scores
+
+Two scores were developed: one for evaluating "company profiles" and another for "customer reviews." Each one is in a individual curated table
+To be honest, I don’t have deep expertise in score creation, so I consulted ChatGPT to validate ideas and then implemented the solution. I understand that this scenario closely resembles real-world situations where a data scientist would ideate and design the model, while the data engineer would be responsible for the implementation. This collaboration allows leveraging domain-specific knowledge while ensuring scalable and efficient deployment.
+
+[Company profile score explanation](docs/score_explanation/company_profiles)
+
+[Customer review score explanation](docs/score_explanation/user_reviews)
+
+
+## 6. Interactive Application with Streamlit
 
 I developed a **Streamlit app** that allows users to input data and generate customized content based on their responses. This app serves as a user-friendly interface to interact with the data intuitively.
 Here an example:
