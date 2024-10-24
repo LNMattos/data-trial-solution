@@ -63,6 +63,7 @@ The upsert functions I implemented are straightforward. They keep all the data i
 
 ### Streamlit App
 As mentioned in the challenge description, the company has been working on delivering personalized content for readers. To reflect this, I built a small prompt using Streamlit. This prompt generates tailored data for a user interested in buying or selling a house, leveraging information from the Google tables provided in the challenge.
+To works its necessary to use a OpenAI API key
 
 ### FMCSA Files
 Due to time constraints, I didn’t delve deeply into processing the FMCSA files in the gold layer. My focus was on the Google tables, as they were more directly related to the core task at hand.
