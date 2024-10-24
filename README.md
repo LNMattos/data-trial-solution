@@ -26,6 +26,8 @@ I built **DAGs** in **Airflow** to automate the data flow.:
 
 Each data file is processed individually through pipeline functions, ensuring modularity and flexibility.
 
+[Pipelines folder](dags/pipelines)
+
 ## 3. Lake House Architecture
 
 I implemented a **Lake House** architecture using **Airflow**, **MinIO** (S3 simulation), and **PostgreSQL**, with distinct layers:
@@ -38,9 +40,16 @@ I implemented a **Lake House** architecture using **Airflow**, **MinIO** (S3 sim
 
 ## 4. Data Analysis with Jupyter Lab
 
-I conducted exploratory data analysis using a **Jupyter Lab** notebook, focusing on the `company_profiles_google_maps` file. This file provides insights generated from data about company profiles.
+I conducted exploratory data analysis using a **Jupyter Lab** notebook, focusing on the `company_profiles_google_maps` file. This file provides insights generated from data about company profiles. 
 
-## 4. Scores
+Including: 
+- top real state companies by companies score
+- acessibility and diversity friendly by city
+- most common used adjetives in reviews
+
+[notebook file](notebooks/real_state_analysis_data.ipynb)
+
+## 5. Scores
 
 Two scores were developed: one for evaluating "company profiles" and another for "customer reviews." Each one is in a individual curated table
 To be honest, I don’t have deep expertise in score creation, so I consulted ChatGPT to validate ideas and then implemented the solution. I understand that this scenario closely resembles real-world situations where a data scientist would ideate and design the model, while the data engineer would be responsible for the implementation. This collaboration allows leveraging domain-specific knowledge while ensuring scalable and efficient deployment.
@@ -54,6 +63,7 @@ To be honest, I don’t have deep expertise in score creation, so I consulted Ch
 
 I developed a **Streamlit app** that allows users to input data and generate customized content based on their responses. This app serves as a user-friendly interface to interact with the data intuitively.
 Here an example:
+
 [AI Generated markdown](docs/auto_generated_md.md)
 
 To works its necessary to use a OpenAI API key
