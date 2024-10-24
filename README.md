@@ -5,11 +5,14 @@
 ## 1. Interfaces and Code Implementations for Data Processing
 
 I developed a modular architecture using interfaces and different backends such as **Pandas** and **PySpark** for data manipulation. Following SOLID fundamentals.
+[data_processor doc](docs/data_processor_doc.md)
+[reader_writer_processor doc](docs/reader_writer_doc.md)
+
 Key functionalities include:
 
 - **S3** file management (via MinIO):
   - Moving files between different storage locations.
-  - Efficient reading and writing of files.
+  - Efficient reading and writing of files. 
   - Implementing *upsert* operations.
 
 In addition, I created several auxiliary functions to optimize the data processing.
@@ -31,6 +34,8 @@ I implemented a **Lake House** architecture using **Airflow**, **MinIO** (S3 sim
 - **Silver**: Processed and trusted data stored in *trusted* tables within PostgreSQL.
 - **Gold**: Curated and ready-to-consume data stored in *curated* tables in PostgreSQL, optimized for analysis.
 
+![Architecture](docs/lakehouse-clever.png)
+
 ## 4. Data Analysis with Jupyter Lab
 
 I conducted exploratory data analysis using a **Jupyter Lab** notebook, focusing on the `company_profiles_google_maps` file. This file provides insights generated from data about company profiles.
@@ -38,6 +43,9 @@ I conducted exploratory data analysis using a **Jupyter Lab** notebook, focusing
 ## 5. Interactive Application with Streamlit
 
 I developed a **Streamlit app** that allows users to input data and generate customized content based on their responses. This app serves as a user-friendly interface to interact with the data intuitively.
+[AI Generated markdown](docs/auto_generated_md.md)
+
+
 
 ## Data Engineering Challenge: Observations and Reflections
 
