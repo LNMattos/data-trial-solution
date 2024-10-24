@@ -6,7 +6,8 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 sia = SentimentIntensityAnalyzer()
 
 ### 4. Calculate Adjectives Sentiment Score (S₃)
-def calculate_adjectives_sentiment(adjectives_list):
+def calculate_adjectives_sentiment(adjectives):
+    adjectives_list = adjectives.split(",")
     if not adjectives_list or not isinstance(adjectives_list, list):
         return 0  # Neutral if no adjectives
     sentiment_scores = []
@@ -39,7 +40,7 @@ def calculate_user_review_score(df, lambda_decay=0.001, weights=None, drop_inter
         weights = {
             'review_rating': 0.6,
             'sentiment': 0.3,
-            'adjectives_sentiment': 0.1,
+            'adjectives_sentiment': 0.1, # Not used 
             'review_likes': 0 # Not used 
         }
     
